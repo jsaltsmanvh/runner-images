@@ -12,7 +12,6 @@ pool:
 steps:
 - script: |
     choco install packer
-    choco install git -params '"/GitAndUnixToolsOnPath"'
   displayName: 'Install packer'
 
 - task: AzurePowerShell@5
