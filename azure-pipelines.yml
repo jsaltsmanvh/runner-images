@@ -11,6 +11,10 @@ pool:
   timeoutInMinutes: 1860
 
 steps:
+- task: ChocolateyToolInstaller@1
+  inputs:
+    force: true
+  
 - script: |
     choco install packer
   displayName: 'Install packer'
