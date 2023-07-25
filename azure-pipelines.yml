@@ -12,4 +12,16 @@ pool:
 steps:
 - script: |
     choco install packer
+    choco install git -params '"/GitAndUnixToolsOnPath"'
   displayName: 'Install packer'
+
+- task: AzurePowerShell@5
+  inputs:
+    azureSubscription: 'lev'
+    ScriptType: 'InlineScript'
+    Inline: |
+      Set-Location runner-images
+      Import-Module .\helpers\GenerateResourcesAndImage.ps1
+      $PSNativeCommandArgumentPassing = 'Legacy'
+      GenerateResourcesAndImage -subscriptionid "70781410-ee03-4e2b-a97e-b2a55b88bf95" -resourcegroupname "lev-rg-adopipelineimage" -azurelocation "East US" -imagetype "UbuntuMinimal"
+    azurePowerShellVersion: 'LatestVersion'
